@@ -1,5 +1,5 @@
 import Logo from "../Components/Logo";
-import { Mail, Lock, Eye,EyeOff } from "lucide-react";
+import { Mail, Lock, Eye,EyeOff, Info } from "lucide-react";
 import BloodDonating from '../Assets/BloodDonating.png'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
