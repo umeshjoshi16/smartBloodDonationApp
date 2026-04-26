@@ -4,6 +4,8 @@ import Login from './Pages/Login'
 import Register from './Pages/Register'
 import PageNotFound from './Pages/PageNotFound'
 import Certificate from './Components/Certificate'
+import DashboardDonor from './Pages/Donor/DashboardDonor'
+import EditProfile from './Pages/Donor/EditProfile'
 
 
 
@@ -17,6 +19,9 @@ const App = () => {
       <Route path='/login' element={<Login/>}/>
       <Route path='/register' element={<Register/>}/>
       <Route path='/certificate' element={<Certificate/>}/>
+      <Route path='/donor' element={<DashboardDonor/>}/>
+      <Route  path='/donor/edit-profile' element={<EditProfile/>}/>
+
 
       
 

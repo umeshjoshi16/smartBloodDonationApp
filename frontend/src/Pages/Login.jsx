@@ -38,7 +38,7 @@ const onSubmit=()=>{
    
    
     <div className="flex flex-col h-screen items-center justify-start  bg-gray-50 overflow-hidden shadow-md ml-auto">
-      <div className="bg-red-900 h-60   w-full  md:w-110 flex flex-col items-start justify-start p-5 relative overflow-hidden ">
+      <div className="bg-red-900 h-60   w-full sm:w-110 flex flex-col items-start justify-start p-5 relative overflow-hidden ">
         <div className="rounded-full w-40 h-40 bg-white/20 absolute -top-15 -right-6 "></div>
         <div className="rounded-full w-25 h-25 bg-white/20 absolute -bottom-15 -left-6 "></div>
         <div className="rounded-full w-6 h-6 bg-white/20 absolute bottom-15 right-6 rotate-30 "></div>
@@ -52,7 +52,7 @@ const onSubmit=()=>{
           Login in to your account and keep saving lives.
         </p>
       </div>
-      <div className="flex items-center h-screen flex-col bg-white  shadow justify-start pt-5  w-full  md:w-110 ">
+      <div className="flex items-center h-screen flex-col bg-white  shadow justify-start pt-5  w-full  sm:w-110 ">
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center justify-center roboto-slab-body p-5 gap-3">
           <div className="flex flex-col relative w-90 justify-center">
             <label className="roboto-slab-heading">Email</label>
