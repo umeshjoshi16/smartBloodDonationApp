@@ -134,7 +134,7 @@ const handleCopy = () => {
       </div>
 
        {/* Confirmation Checkbox */}
-        <div className="flex items-start gap-3 my-3  border border-gray-200 w-full rounded-lg p-2 px-2">
+        <div className="flex items-start gap-3 my-3  border-b border-gray-300 w-full  p-2 px-2">
           <input
             type="checkbox"
             checked={healthStatus}
