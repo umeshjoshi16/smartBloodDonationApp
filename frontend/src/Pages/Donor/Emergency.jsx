@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { CircleAlert,XIcon,Copy, MessageCircle,Droplet, Heart, Phone, UserRoundPlus,Check} from "lucide-react";
+import Camps from "./Camps";
 
 
 
 export default function Emergency(){
-
+const [emergencyActive,setEmergencyActive]=useState(true);
   const [canDonate,setCanDonate]=useState(false);
   const[refer,setRefer]=useState(false);
   const [copied, setCopied] = useState(false);
@@ -33,9 +34,22 @@ const handleCopy = () => {
 };
   return (
     <div className="p-6 space-y-6 bg-gray-50 min-h-screen ">
-      <div className="flex flex-col gap-3 md:m-5 m-1 mb-20 ">
+      <div className="flex flex-row  items-start justify-start  gap-10">
+          <button onClick={()=>{
+            setEmergencyActive(true);
+          }} className={ `rounded-xl bg-red-900 p-2 px-3 text-white font-medium hover:bg-red-700 cursor-pointer`}>Emergency</button>
+          <button onClick={()=>{
+            setEmergencyActive(false);
+          }}  className="rounded-xl bg-red-900 p-2 px-3 text-white font-medium hover:bg-red-700 cursor-pointer">Camps</button>
+
+        </div>
+
+        {
+          emergencyActive ? (
+            <div className="flex flex-col gap-3 md:m-5 m-1 mb-20 ">
+        
         <div className="flex items-center w-full mb-2">
-          <h1 className="font-semibold text-lg">Emergency Blood Requests</h1>
+          <h1 className=" text-lg">Emergency Blood Requests</h1>
         </div>
         <div className="flex flex-row items-start justify-start gap-5 border-b border-gray-300 p-2">
           <button className="border px-7 p-1.5 rounded-xl border-gray-200 font-medium bg-white cursor-pointer hover:bg-gray-200">
@@ -435,6 +449,16 @@ const handleCopy = () => {
          
         </div>
       </div>
+
+          ) :(
+            <div>
+              <Camps/>
+
+            </div>
+
+          )
+        }
+      
     </div>
   );
   

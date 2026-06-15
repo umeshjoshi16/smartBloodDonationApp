@@ -43,7 +43,7 @@ export default function Camps(){
   return (
     <div className="p-6 space-y-6 bg-gray-50 min-h-screen ">
       <div className="flex flex-col gap-3 md:m-5 m-1  ">
-        <h1 className="font-semibold text-lg">Upcoming Camps</h1>
+        <h1 className="font-medium text-lg">Upcoming Camps</h1>
       </div>
       <div className="flex flex-row items-start justify-start gap-5 border-b border-gray-300 p-2">
         <button className="border px-7 p-1.5 rounded-xl border-gray-200 font-medium bg-white cursor-pointer hover:bg-gray-200">

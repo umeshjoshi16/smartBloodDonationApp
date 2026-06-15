@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Toaster, toast } from "react-hot-toast";
+import axios from 'axios';
 
 
 
@@ -40,12 +41,21 @@ export default function Register(){
   };
  
   const handleLocationSuccess = (data) => {
-    const finalPayload = { ...formData, ...data };
+   try{
+     const finalPayload = { ...formData, ...data };
+      const res=axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`,finalPayload,{
+        withCredentials:true,
+      })
     console.log("Final payload", finalPayload);
-   toast.success("Thank you for registering", { duration: 3000, position: "top-center" });
+   toast.success("Thank you for registering");
    setTimeout(() => {
     navigate('/login');
   }, 1000);
+   }
+   catch(err){
+    toast.error("Failed to Register")
+  console.log(err);
+   }
   
   };
  
@@ -445,7 +455,7 @@ const DonorForm=({ onSuccess, onBack })=>{
                           />
                           AB-
                         </label>
-                      </div>
+                     </div>
                       <p className="text-xs text-red-500">{errors.bloodGroup?.message}</p>
                     </div>
                   </div>

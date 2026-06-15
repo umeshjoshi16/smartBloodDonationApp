@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Heart,
@@ -8,11 +8,14 @@ import {
   Shield,
   Trophy,
 } from "lucide-react";
+import { AuthContext } from "../../Context/AuthContext";
+
 
 
 export default function Profile(){
   const [logout, setLogout] = useState(false);
   const navigate = useNavigate();
+  const{user,setUser}=useContext(AuthContext);
 
   const eligibilityPct = 63;
 
@@ -57,14 +60,16 @@ export default function Profile(){
           <h1 className="text-red-900 font-bold">AS</h1>
         </div>
         <div>
-          <h1 className="font-bold text-red-900">Aarav Sharma</h1>
-          <h1 className="text-gray-500 text-sm">Blood type: O+</h1>
-          <h1 className="text-gray-500 text-sm">Kathmandu</h1>
-          <h1 className="text-gray-500 text-sm">Donor Since: 2022</h1>
+          <h1 className="font-bold text-red-900">{user?.donorName}</h1>
+          <h1 className="text-gray-500 text-sm">Blood type: {user?.bloodGroup?.toUpperCase()}</h1>
+          <h1 className="text-gray-500 text-sm">{user?.city}</h1>
+         <h1 className="text-gray-500 text-sm">
+  Donor Since: {user?.lastDonated ?? "........"}
+</h1>
         </div>
 
         <div className="w-full flex items-center justify-evenly">
-          <button className="p-1 border h-fit rounded-xl border-green-200  bg-green-50 text-green-800 cursor-pointer hover:bg-green-200 px-2  ">
+          <button className="p-1 border h-fit rounded-lg border-green-200  bg-green-50 text-green-800 cursor-pointer hover:bg-green-200 px-2  ">
             Available to Donate
           </button>
 
@@ -72,7 +77,7 @@ export default function Profile(){
             onClick={() => {
               navigate("/donor/edit-profile");
             }}
-            className="p-1 border h-fit rounded-xl border-gray-200  bg-gray-50 text-gray-800 cursor-pointer hover:bg-gray-200 px-2  "
+            className="p-1 border h-fit rounded-lg border-gray-200  bg-gray-50 text-gray-800 cursor-pointer hover:bg-gray-200 px-2  "
           >
             Edit Profile
           </button>

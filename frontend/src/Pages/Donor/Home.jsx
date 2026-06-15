@@ -1,17 +1,42 @@
-import { useState } from "react";
+import { useState,useContext,useEffect } from "react";
 import { Bell, CircleCheckBig, Phone, Calendar, Clock, MapPin, CircleAlert, Heart, UserRoundPlus, ChevronRight, Scale, Trophy, GitBranch, Activity, X, Droplets, FlaskConical, CalendarDays } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function Home() {
+
+  
   const navigate = useNavigate();
   const [notificationOpen, setNotificationOpen] = useState(false);
+  const { setUser,user } = useContext(AuthContext);
+
+ 
+useEffect(() => {
+  const fetchProfile = async () => {
+    try {
+     const res= await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/getprofile`, {
+     withCredentials: true,
+  });
+   setUser(res.data.user); 
+    
+    console.log(res.data); 
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  fetchProfile();
+}, []);
+
+  
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* navbar */}
       <div className="bg-white h-15 relative border-b border-gray-300 flex items-center shadow">
         <div className="px-5">
-          <h1 className="roboto-slab-heading text-lg">Good morning, Aarav 👋</h1>
+          <h1 className="roboto-slab-heading text-lg">Good morning,{user?.donorName} 👋</h1>
         </div>
         <div className="p-2 ml-auto flex flex-row gap-4">
           <button
@@ -85,7 +110,7 @@ export default function Home() {
   <div className="flex items-center justify-between mb-3">
     <h2 className="font-semibold text-gray-800">Health Tools</h2>
     <button
-      onClick={() => navigate("/donor/health-tools")}
+      onClick={() => navigate("/health-tools")}
       className="text-red-900 text-xs font-medium hover:underline cursor-pointer flex items-center gap-0.5"
     >
       See all <ChevronRight size={13} />

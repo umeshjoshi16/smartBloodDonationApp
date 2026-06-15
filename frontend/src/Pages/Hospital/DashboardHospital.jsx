@@ -1,44 +1,30 @@
 import Logo from '/src/Components/Logo.jsx'
 import Home from './Home';
 import Emergency from './Emergency';
-import Camps from './Camps';
-import HealthTools from './HealthTools';
-import Leaderboard from './Leaderboard';
+import Camp from './Camp';
+import Donors from './Donors';
+
 import Profile from './Profile';
-import { useState,useContext } from "react";
-import {
+import { useState } from "react";
+import {HeartHandshake,
   LayoutDashboard,Activity,Grid2x2Plus,CircleStar,Bell,Cross,CircleCheckBig,X,Menu,User,House,CircleAlert,TrendingUp,Calendar,Phone,Map,Locate,MapPin,Clock,Shield,Download,Trophy,Heart,ChevronRight,Crown,Users,MapIcon,Building,Droplet,XIcon,FileWarning,
   HeartPulse,
   Bandage,
 } 
   from "lucide-react";
 import { Outlet,useNavigate,useLocation} from "react-router-dom";
-import { AuthContext } from "../../Context/AuthContext";
 
-
-
-export default function DashboardDonor() {
-  const [notificationOpen, setNotificationOpen] = useState(false);
-   const navigate=useNavigate();
-   const location = useLocation();
-     const { setUser,user } = useContext(AuthContext);
-
-  function getInitials(fullName) {
-  if (!fullName) return "";
-
-  return fullName
-    .trim()
-    .split(/\s+/)
-    .map(n => n[0].toUpperCase())
-    .join("");
-}
+export default function DashboardHospital() {
+  const navigate=useNavigate();
 
 const path = location.pathname;
 
 const active =
-  path === "/donor" || path === "/donor/"
+  path === "/hospital" || path === "/hospital/"
     ? "home"
     : path.split("/")[2];
+
+ const [notificationOpen, setNotificationOpen] = useState(false);
 
   return (
     <div className={`flex flex-row roboto-slab-body `}>
@@ -52,8 +38,7 @@ const active =
 
         <div className=" flex flex-col gap-2 w-full my-10">
          <button
-   onClick={() => navigate("/donor/home")}
- 
+   onClick={() => navigate("/hospital/home")}
   className={`flex flex-row items-center mx-2 rounded-xl p-3 gap-2
     transition-all duration-200 ease-in-out
     hover:bg-white/15 hover:translate-x-1
@@ -70,8 +55,7 @@ const active =
           </button>
 
         <button
-   onClick={() => navigate("/donor/bloodhub")}
- 
+   onClick={() => navigate("/hospital/emergency")}
   className={`flex flex-row items-center mx-2 rounded-xl p-3 gap-2
     transition-all duration-200 ease-in-out
     hover:bg-white/15 hover:translate-x-1
@@ -83,50 +67,47 @@ const active =
     }
   `}
 >
-  <HeartPulse className={active === "emergency" ? "text-white" : "text-white/80"} />
-  <span>Blood Hub</span>
+  <Activity className={active === "emergency" ? "text-white" : "text-white/80"} />
+  <span>Emergency</span>
 </button>
 
           <button
-   onClick={() => navigate("/donor/healthtools")}
- 
+   onClick={() => navigate("/hospital/camp")}
   className={`flex flex-row items-center mx-2 rounded-xl p-3 gap-2
     transition-all duration-200 ease-in-out
     hover:bg-white/15 hover:translate-x-1
     cursor-pointer
     ${
-      active === "healthtools"
+      active === "camp"
         ? "bg-white/30 text-white shadow-inner border border-white/10 font-medium"
         : "text-white"
     }
   `}
 >
-  <Bandage className={active === "healthtools" ? "text-white" : "text-white/80"} />
-  <span>Health Tools</span>
+  <Calendar className={active === "camp" ? "text-white" : "text-white/80"} />
+  <span>Camp</span>
 </button>
 
         <button
-   onClick={() => navigate("/donor/leaderboard")}
- 
+ onClick={() => navigate("/hospital/donors")}
   className={`flex flex-row items-center mx-2 rounded-xl p-3 gap-2
     transition-all duration-200 ease-in-out
     hover:bg-white/15 hover:translate-x-1
     cursor-pointer
     ${
-      active === "leaderboard"
+      active === "donors"
         ? "bg-white/30 text-white shadow-inner border border-white/10 font-medium"
         : "text-white"
     }
   `}
 >
-  <TrendingUp className={active === "leaderboard" ? "text-white" : "text-white/80"} />
-  <span>Leaderboard</span>
+  <HeartHandshake className={active === "donors" ? "text-white" : "text-white/80"} />
+  <span>Donors</span>
 </button>
         </div>
 
        <button
-   onClick={() => navigate("/donor/profile")}
-  
+   onClick={() => navigate("/hospital/profile")}
   className={` flex flex-row items-center justify-between absolute bottom-2 px-4 py-3 mx-2 rounded-xl
     transition-all duration-200 ease-in-out
     hover:bg-white/15 hover:scale-[1.01]
@@ -138,17 +119,17 @@ const active =
     }
   `}
 >
-  <div className="flex  items-center gap-3">
+  <div className="flex items-center gap-3">
     <div
-      className={`rounded-full w-10 h-10 flex   items-center justify-center font-bold
+      className={`rounded-full w-10 h-10 flex items-center justify-center font-bold
         ${active === "profile" ? "bg-white text-red-900" : "bg-white/20 text-white"}
       `}
     >
-     {getInitials(user?.donorName)}
+      CH
     </div>
 
     
-      <span className="flex flex-wrap mx-2 text-sm font-medium ">{user?.donorName}</span>
+      <span className="text-sm font-medium">Civil Hospital</span>
     
   
   </div>
@@ -158,14 +139,14 @@ const active =
       </div>
 
       <div className="bg-gray-100 w-full relative md:ml-50   overflow-y-auto">
-       <Outlet/>
-      
+   
+  <Outlet />
+
+    
       </div>
       <div className="m-2 h-15 border-gray-300 rounded-xl bg-white shadow fixed bottom-5 left-1 right-1 flex flex-row items-center justify-evenly  md:hidden">
         <button
-   onClick={() => navigate("/donor/home")}
-         
-       
+         onClick={() => navigate("/hospital/home")}
           className={`flex flex-col items-center justify-center cursor-pointer ${
             active === "home" ? "text-red-900 " : "text-gray-600"
           }`}
@@ -183,13 +164,12 @@ const active =
         </button>
 
         <button
-   onClick={() => navigate("/donor/bloodhub")}
-          
+          onClick={() => navigate("/hospital/emergency")}
           className={`flex flex-col items-center justify-center cursor-pointer ${
             active === "emergency" ? "text-red-900" : "text-gray-600"
           }`}
         >
-          <HeartPulse/>
+          <Activity/>
           <h1
             className={`${
               active === "emergency"
@@ -197,51 +177,48 @@ const active =
                 : "text-gray-600 text-xs"
             }`}
           >
-            Blood Hub
+            Emergency
           </h1>
         </button>
 
         <button
-   onClick={() => navigate("/donor/healthtools")}
-          
+           onClick={() => navigate("/hospital/camp")}
           className={`flex flex-col items-center justify-center cursor-pointer ${
-            active === "camps" ? "text-red-900" : "text-gray-600"
+            active === "camp" ? "text-red-900" : "text-gray-600"
           }`}
         >
-          <Bandage/>
+          <Calendar/>
           <h1
             className={`${
-              active === "healthtools"
+              active === "camp"
                 ? "text-red-900 font-extrabold text-sm "
                 : "text-gray-600 text-xs"
             }`}
           >
-            Health Tools
+            Camp
           </h1>
         </button>
 
         <button
-   onClick={() => navigate("/donor/leaderboard")}
-         
+          onClick={() => navigate("/hospital/donors")}
           className={`flex flex-col items-center justify-center cursor-pointer ${
-            active === "leaderboard" ? "text-red-900" : "text-gray-600"
+            active === "donors" ? "text-red-900" : "text-gray-600"
           }`}
         >
-          <TrendingUp />
+          <HeartHandshake/>
           <h1
             className={`${
-              active === "leaderboard"
+              active === "donors"
                 ? "text-red-900 font-extrabold text-sm "
                 : "text-gray-600 text-xs"
             }`}
           >
-            Leaderboard
+            Donors
           </h1>
         </button>
 
         <button
-   onClick={() => navigate("/donor/profile")}
-          
+         onClick={() => navigate("/hospital/profile")}
           className={`flex flex-col items-center justify-center cursor-pointer ${
             active === "profile" ? "text-red-900" : "text-gray-600"
           }`}

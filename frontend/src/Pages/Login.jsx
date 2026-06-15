@@ -1,11 +1,14 @@
 import Logo from "../Components/Logo";
 import { Mail, Lock, Eye,EyeOff, Info } from "lucide-react";
 import BloodDonating from '../Assets/BloodDonating.png'
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import {useForm} from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from 'axios';
+import { Toaster,toast } from "react-hot-toast";
+import { AuthContext } from "../Context/AuthContext";
 
 const userSchema=yup.object({
   email:yup.string().email('Invalid email format').required('Enter your email'),
@@ -24,13 +27,43 @@ export default function Login() {
     resolver:yupResolver(userSchema)
   });
 
+
+  const{authenticated,user,setUser,setAuthenticated}=useContext(AuthContext);
   const navigate=useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const togglePassword = () => setShowPassword(!showPassword);
 
-const onSubmit=()=>{
-  console.log(data);
+const onSubmit=async(data)=>{
+try{
+  const res=await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`,data,{
+    withCredentials:true,
+  })
+  const userData=res.data.user;
+  setUser(userData);
+  setAuthenticated(true);
+  toast.success("Login Sucessful");
+
+  if(userData.role==="donor"){
+    navigate('/donor')
+  }
+  else if (userData.role==="hospital"){
+   navigate('/hospital')
+  }
+ 
+   else if(userData.role==="organization"){
+   navigate('/hospital')
+  }
+
+  console.log(res.data);
   reset();
+
+}
+catch(err){
+  toast.error("Failed to Login.Please Check your credentials")
+  console.log(err);
+
+
+}
 }
 
 
@@ -38,6 +71,7 @@ const onSubmit=()=>{
    
    
     <div className="flex flex-col h-screen items-center justify-start  bg-gray-50 overflow-hidden shadow-md ml-auto">
+      <Toaster position="top-right" />
       <div className="bg-red-900 h-60   w-full sm:w-110 flex flex-col items-start justify-start p-5 relative overflow-hidden ">
         <div className="rounded-full w-40 h-40 bg-white/20 absolute -top-15 -right-6 "></div>
         <div className="rounded-full w-25 h-25 bg-white/20 absolute -bottom-15 -left-6 "></div>

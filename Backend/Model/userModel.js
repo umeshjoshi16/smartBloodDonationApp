@@ -55,7 +55,7 @@ const userSchema=new mongoose.Schema({
   bloodGroup:{
     type:String,
    
-    enum:['a+','a-','b+','b-','o+','o-','ab+','ab-']
+    enum:['A+','A-','B+','B-','O+','O-','AB+','AB-']
   },
   
 
