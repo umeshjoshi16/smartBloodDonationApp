@@ -207,10 +207,10 @@ const getTimeAgo = (date) => {
 
         {/*current requests */}
         {activeTab === "myRequest" && (
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col  gap-4">
 
             {/* Status buttons */}
-            <div className="flex gap-2">
+            <div className="flex gap-2 ">
               {["Active", "Fulfilled", "Cancelled"].map((s) => (
                 <button
                   key={s}
@@ -227,7 +227,7 @@ const getTimeAgo = (date) => {
             </div>
 
             {/* Cards */}
-            <div className="flex flex-wrap gap-5">
+            <div className="flex flex-wrap  gap-4">
               {filtered.length === 0 && (
                 <div className="flex flex-col items-center">
                 
