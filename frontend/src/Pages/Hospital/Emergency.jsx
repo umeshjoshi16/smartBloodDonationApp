@@ -211,7 +211,7 @@ const getTimeAgo = (date) => {
 
             {/* Status buttons */}
             <div className="flex gap-2 ">
-              {["Active", "Fulfilled", "Cancelled"].map((s) => (
+              {["Active", "Fulfilled"].map((s) => (
                 <button
                   key={s}
                   onClick={() => setStatusFilter(s)}

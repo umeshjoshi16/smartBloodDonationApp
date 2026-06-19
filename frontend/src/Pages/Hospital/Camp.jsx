@@ -578,7 +578,7 @@ const setActive = (camp) => {
 
     {/* Status button */}
     <div className="flex gap-2 overflow-x-scroll hide-scrollbar">
-      {["Upcoming", "Active", "Completed", "Cancelled"].map((s) => (
+      {["Upcoming", "Active", "Completed"].map((s) => (
         <button
           key={s}
           onClick={() => setStatusFilter(s)}
