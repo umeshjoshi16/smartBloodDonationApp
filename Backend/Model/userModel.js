@@ -57,7 +57,15 @@ const userSchema=new mongoose.Schema({
    
     enum:['A+','A-','B+','B-','O+','O-','AB+','AB-']
   },
-  
+  donations:{
+    type:Number,
+    default:0,
+  },
+  lastDonated:{
+    type:Date,
+
+
+  },
 
 
 
@@ -66,6 +74,21 @@ const userSchema=new mongoose.Schema({
     type:String,
   
   },
+  campsOrganized:{
+    type:Number,
+    default:0,
+
+  },
+   emergencyRequests:{
+     type:Number,
+    default:0,
+
+   },
+    totalDonorsParticipated:{
+    type:Number,
+    default:0,
+
+    },
  
 
 

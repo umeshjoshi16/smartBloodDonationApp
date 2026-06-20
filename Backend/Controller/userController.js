@@ -163,4 +163,42 @@ const getProfile=async(req,res)=>{
   }
 }
 
-export {registerUser,loginUser,getProfile};
+const getDonors = async (req, res) => {
+  try {
+    const hospitalId = req.user.id; 
+    
+    
+
+   
+    const hospital = await User.findById(hospitalId);
+
+    if (!hospital) {
+      return res.status(404).json({
+        success: false,
+        message: "Hospital not found",
+      });
+    }
+
+    const { city, province } = hospital;
+
+   
+    const donors = await User.find({
+      role: "donor",
+      city,
+      province,
+    });
+
+    res.status(200).json({
+      success: true,
+      donors,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export {registerUser,loginUser,getProfile,getDonors};

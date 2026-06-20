@@ -1,13 +1,6 @@
 import { useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Heart,
-  Download,
-  Bell,
-  MapPin,
-  Shield,
-  Trophy,
-} from "lucide-react";
+import {Heart, Download, Bell, MapPin, Shield, Trophy,} from "lucide-react";
 import { AuthContext } from "../../Context/AuthContext";
 
 
